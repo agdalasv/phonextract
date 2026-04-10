@@ -243,7 +243,7 @@ phonextract/
 
 ## 🔧 Configuración de GitHub Pages
 
-El sitio web está disponible en: **https://TU_USUARIO.github.io/phonextract/**
+El sitio web está disponible en: **https://agdalasv.github.io/phonextract/**
 
 Para configurar GitHub Pages:
 1. Ve a Settings > Pages
