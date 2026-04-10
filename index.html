@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhoneXtract - Number Intelligence Tool</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        :root {
+            --primary-color: #00ff88;
+            --secondary-color: #00d4ff;
+            --dark-bg: #0a0a0f;
+            --card-bg: #12121a;
+            --text-color: #e0e0e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .navbar {
+            background: rgba(10, 10, 15, 0.9) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-link {
+            color: var(--text-color) !important;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 100px 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: #888;
+            margin-bottom: 30px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 255, 136, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .feature-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .feature-description {
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .install-section {
+            padding: 80px 0;
+            background: rgba(18, 18, 26, 0.5);
+        }
+
+        .os-tabs {
+            margin-bottom: 30px;
+        }
+
+        .os-tab-btn {
+            background: transparent;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            color: var(--text-color);
+            padding: 12px 25px;
+            margin-right: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .os-tab-btn.active, .os-tab-btn:hover {
+            background: var(--primary-color);
+            color: var(--dark-bg);
+            border-color: var(--primary-color);
+        }
+
+        .code-block {
+            background: #1a1a24;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            position: relative;
+        }
+
+        .code-block pre {
+            margin: 0;
+            color: var(--primary-color);
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            white-space: pre-wrap;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--primary-color);
+            border: none;
+            color: var(--dark-bg);
+            padding: 5px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .download-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .download-btn {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            color: var(--dark-bg);
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+        }
+
+        .contact-section {
+            padding: 80px 0;
+        }
+
+        .social-link {
+            color: var(--text-color);
+            font-size: 2rem;
+            margin: 0 15px;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        footer {
+            background: var(--card-bg);
+            padding: 30px 0;
+            text-align: center;
+            border-top: 1px solid rgba(0, 255, 136, 0.1);
+        }
+
+        .footer-text {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .typing-effect {
+            display: inline;
+        }
+
+        .typing-effect::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .gradient-text {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .os-tab-btn {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-phone-alt me-2"></i>PhoneXtract
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#features">Características</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#install">Instalación</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#download">Descargar</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="hero-content">
+                        <h1 class="hero-title">PhoneXtract</h1>
+                        <p class="hero-subtitle">
+                            <span class="typing-effect">Herramienta de Inteligencia de Números Telefónicos</span>
+                        </p>
+                        <p class="mb-4" style="color: #888;">
+                            Herramienta OSINT poderosa para obtener información sobre cualquier número telefónico a nivel mundial. 
+                            Ideal para propósitos educativos e investigación en seguridad.
+                        </p>
+                        <a href="#install" class="download-btn">
+                            <i class="fas fa-download me-2"></i>Comenzar
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <i class="fas fa-mobile-alt" style="font-size: 150px; background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">
+                <span class="gradient-text">Características</span>
+            </h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="fas fa-map-marker-alt feature-icon"></i>
+                        <h3 class="feature-title">Ubicación</h3>
+                        <p class="feature-description">Obtén la ubicación (estado/región) del número telefónico basado en prefijos.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="fas fa-tower-cell feature-icon"></i>
+                        <h3 class="feature-title">Operador</h3>
+                        <p class="feature-description">Detecta el operador móvil (Airtel, Jio, AT&T, Vodafone, etc.).</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="fas fa-phone feature-icon"></i>
+                        <h3 class="feature-title">Tipo de Teléfono</h3>
+                        <p class="feature-description">Identifica si es Móvil, Línea Fija, VoIP o Toll Free.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="fas fa-clock feature-icon"></i>
+                        <h3 class="feature-title">Zona Horaria</h3>
+                        <p class="feature-description">Obtén la zona horaria del número telefónico.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="fab fa-whatsapp feature-icon"></i>
+                        <h3 class="feature-title">WhatsApp</h3>
+                        <p class="feature-description">Verifica si el número está registrado en WhatsApp.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="fas fa-shield-alt feature-icon"></i>
+                        <h3 class="feature-title">Reporte Spam</h3>
+                        <p class="feature-description">Consulta bases de datos públicas de spam y reportes.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="fas fa-globe feature-icon"></i>
+                        <h3 class="feature-title">Soporte Global</h3>
+                        <p class="feature-description">Funciona con números de todos los países del mundo.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="fas fa-share-alt feature-icon"></i>
+                        <h3 class="feature-title">Redes Sociales</h3>
+                        <p class="feature-description">Busca el número en Facebook, Instagram, Telegram, LinkedIn.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="fas fa-file-alt feature-icon"></i>
+                        <h3 class="feature-title">Reportes</h3>
+                        <p class="feature-description">Genera reportes detallados en formato texto.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Install Section -->
+    <section id="install" class="install-section">
+        <div class="container">
+            <h2 class="text-center mb-5">
+                <span class="gradient-text">Instalación</span>
+            </h2>
+            
+            <div class="os-tabs text-center mb-4">
+                <button class="os-tab-btn active" onclick="showOS('arch')">Arch Linux</button>
+                <button class="os-tab-btn" onclick="showOS('ubuntu')">Ubuntu/Debian</button>
+                <button class="os-tab-btn" onclick="showOS('fedora')">Fedora</button>
+                <button class="os-tab-btn" onclick="showOS('windows')">Windows</button>
+                <button class="os-tab-btn" onclick="showOS('termux')">Termux</button>
+            </div>
+
+            <!-- Arch Linux -->
+            <div id="arch" class="os-content">
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode('arch-code')">Copiar</button>
+                    <pre id="arch-code"># Arch Linux
+sudo pacman -Syu
+sudo pacman -S python python-pip git
+
+git clone https://github.com/thakur2309/phonextract.git
+cd phonextract
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python phonextract.py</pre>
+                </div>
+            </div>
+
+            <!-- Ubuntu/Debian -->
+            <div id="ubuntu" class="os-content" style="display: none;">
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode('ubuntu-code')">Copiar</button>
+                    <pre id="ubuntu-code"># Ubuntu / Debian
+sudo apt update && sudo apt upgrade -y
+sudo apt install python3 python3-pip python3-venv git -y
+
+git clone https://github.com/thakur2309/phonextract.git
+cd phonextract
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python3 phonextract.py</pre>
+                </div>
+            </div>
+
+            <!-- Fedora -->
+            <div id="fedora" class="os-content" style="display: none;">
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode('fedora-code')">Copiar</button>
+                    <pre id="fedora-code"># Fedora
+sudo dnf update -y
+sudo dnf install python3 python3-pip git -y
+
+git clone https://github.com/thakur2309/phonextract.git
+cd phonextract
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python3 phonextract.py</pre>
+                </div>
+            </div>
+
+            <!-- Windows -->
+            <div id="windows" class="os-content" style="display: none;">
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode('windows-code')">Copiar</button>
+                    <pre id="windows-code"># Windows (CMD o PowerShell)
+# Requiere: Python 3.x y Git instalados
+
+git clone https://github.com/thakur2309/phonextract.git
+cd phonextract
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+python phonextract.py</pre>
+                </div>
+            </div>
+
+            <!-- Termux -->
+            <div id="termux" class="os-content" style="display: none;">
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode('termux-code')">Copiar</button>
+                    <pre id="termux-code"># Termux (Android)
+pkg update && pkg upgrade -y
+pkg install git python -y
+
+git clone https://github.com/thakur2309/phonextract.git
+cd phonextract
+pip install -r requirements.txt
+python phonextract.py</pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="download-section">
+        <div class="container">
+            <h2 class="mb-4">
+                <span class="gradient-text">Descargar PhoneXtract</span>
+            </h2>
+            <p class="mb-4" style="color: #888;">Versión 2.0 | Actualizado Abril 2026</p>
+            <a href="https://github.com/thakur2309/phonextract/archive/refs/heads/main.zip" class="download-btn">
+                <i class="fas fa-download me-2"></i>Descargar ZIP
+            </a>
+            <p class="mt-3" style="color: #666;">
+                <small>O visita el repositorio: <a href="https://github.com/thakur2309/phonextract" target="_blank" style="color: var(--primary-color);">GitHub</a></small>
+            </p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container text-center">
+            <h2 class="mb-4">
+                <span class="gradient-text">Contacto</span>
+            </h2>
+            <p class="mb-4" style="color: #888;">Sígueme en mis redes sociales</p>
+            <div class="social-links">
+                <a href="https://youtube.com/@firewallbreaker09" class="social-link" target="_blank" title="YouTube">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="https://github.com/thakur2309" class="social-link" target="_blank" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://wa.me/yournumber" class="social-link" target="_blank" title="WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="https://tiktok.com/@agdalasv" class="social-link" target="_blank" title="TikTok">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+                <a href="https://instagram.com/agdala" class="social-link" target="_blank" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p class="footer-text">© 2026 PhoneXtract. Todos los derechos reservados.</p>
+            <p class="footer-text">Creado por Agdala | TikTok: @agdalasv</p>
+            <p class="footer-text" style="color: var(--primary-color);">
+                <small>⚠️ Solo para uso educativo e investigativo</small>
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Particles Effect
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(0, 255, 136, ${this.opacity})`;
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 100; i++) {
+            particles.push(new Particle());
+        }
+
+        function connectParticles() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 150) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(0, 255, 136, ${0.1 * (1 - distance / 150)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+
+            connectParticles();
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        // OS Tabs
+        function showOS(os) {
+            document.querySelectorAll('.os-content').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.os-tab-btn').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById(os).style.display = 'block';
+            event.target.classList.add('active');
+        }
+
+        // Copy Code
+        function copyCode(elementId) {
+            const code = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                alert('¡Código copiado al portapapeles!');
+            });
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(10, 10, 15, 0.95)';
+            } else {
+                navbar.style.background = 'rgba(10, 10, 15, 0.9)';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,210 +1,206 @@
-<h1 align="center"><u> 📌 Find Information by Phone Number 😮 </u></h1>
-
-<p align="center">⚠️ For Educational Purposes Only</p>
-
----
-
 # 📞 PhoneXtract - Number Intelligence Tool
 
-PhoneXtract is a simple yet powerful OSINT-based tool built in Python for gathering basic information about any phone number worldwide. Ideal for educational purposes and security researchers.
-
-> 🔧 Created by: **Alok Thakur**
-> 📺 YouTube: **Firewall Breaker**
-
----
-
-## ⚙️ Features
-
-- 📍 Get the location (state/region level) of the phone number
-- 📡 Detect carrier/operator name (Airtel, Jio, AT&T, Vodafone, etc.)
-- 📞 Identify phone type (Mobile, Landline, VoIP)
-- 🕰️ Time zone of the number
-- 🌐 National & International formats
-- ✅ Validity check of the number
-- 🔠 Prefix and area code analysis
-- 🏙️ City/State/Region (approximate via prefix mapping)
-- 🚫 Placeholder sections for:
-  - Spam reports
-  - Risk score
-  - Data breach info
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.8+-blue?style=flat&logo=python" alt="Python">
+  <img src="https://img.shields.io/badge/License-MIT-green?style=flat" alt="License">
+  <img src="https://img.shields.io/badge/Platform-Linux%20%7C%20Windows%20%7C-Android-purple?style=flat" alt="Platform">
+</p>
 
 ---
 
-## 🌍 International / All Countries Support
+## 📌 Descripción
 
-PhoneXtract supports phone numbers from **all countries around the world** using the `phonenumbers` library.
+PhoneXtract es una herramienta OSINT (Open Source Intelligence) escrita en Python para obtener información básica sobre cualquier número telefónico a nivel mundial. Ideal para propósitos educativos e investigadores de seguridad.
 
-**Supported regions include (but not limited to):**
-
-| Region | Examples |
-|--------|---------|
-| 🇮🇳 South Asia | India, Pakistan, Bangladesh, Nepal, Sri Lanka |
-| 🇺🇸 North America | USA, Canada, Mexico |
-| 🇬🇧 Europe | UK, Germany, France, Italy, Spain, Russia |
-| 🇦🇪 Middle East | UAE, Saudi Arabia, Qatar, Kuwait |
-| 🇨🇳 East Asia | China, Japan, South Korea |
-| 🇧🇷 South America | Brazil, Argentina, Colombia |
-| 🇿🇦 Africa | South Africa, Nigeria, Kenya, Egypt |
-| 🇦🇺 Oceania | Australia, New Zealand |
-
-> ✅ **Always use the full international format with country code.**
-> Example: `+14155552671` (USA), `+447911123456` (UK), `+919876543210` (India)
+> ⚠️ **Solo para uso educativo e investigativo.** El autor no se hace responsable del uso indebido de esta herramienta.
 
 ---
 
-## ⚠️ Accuracy Disclaimer — Please Read
+## ⚙️ Características
 
-> **The information shown by PhoneXtract is NOT always 100% accurate.**
-
-Here is why results may sometimes vary:
-
-- 📡 **Carrier data** can be outdated — numbers are often ported from one carrier to another (MNP - Mobile Number Portability), so the displayed carrier may be the **original carrier**, not the current one.
-- 📍 **Location data** is based on the **number prefix/series**, not the user's real-time GPS location. A person from Mumbai can be using a Delhi number.
-- 🌍 **International accuracy varies** — location and carrier detection is most accurate for Indian numbers, and may be limited for some other countries.
-- 🔢 **Prefix-based mapping** is a static database — it does not update in real time.
-- ✅ **Validity checks** confirm the number format is correct, but do NOT confirm whether the number is currently active or in use.
-
-> ⚡ **This tool is meant for educational and research purposes only. Always verify critical information through official channels.**
+- 📍 **Ubicación** - Obtiene la ubicación (estado/región) del número telefónico
+- 📡 **Operador** - Detecta el nombre del operador (Airtel, Jio, AT&T, Vodafone, etc.)
+- 📞 **Tipo de teléfono** - Identifica si es Móvil, Línea Fija, VoIP
+- 🕰️ **Zona horaria** - Zona horaria del número
+- 🌐 **Formatos** - Formatos Nacional e Internacional
+- ✅ **Validación** - Verifica si el número es válido
+- 🔠 **Análisis de prefijos** - Código de área y prefijo
+- 🏙️ **Ciudad/Estado/Región** - Ubicación aproximada mediante mapeo de prefijos
+- 📱 **Verificación WhatsApp** - Verifica si el número está registrado en WhatsApp
+- 🔍 **Redes Sociales** - Busca el número en Facebook, Instagram, Telegram, LinkedIn
+- 🚫 **Reportes Spam** - Verifica en bases de datos públicas de spam
 
 ---
 
-## 📲 Installation — Termux (Android)
+## 🌍 Soporte Internacional
 
-### Step by Step
+PhoneXtract soporta números telefónicos de **todos los países** usando la librería `phonenumbers`.
+
+**Regiones soportadas:**
+| Región | Ejemplos |
+|--------|----------|
+| 🇮🇳 Asia del Sur | India, Paquistán, Bangladesh, Nepal, Sri Lanka |
+| 🇺🇸 América del Norte | USA, Canadá, México |
+| 🇬🇧 Europa | UK, Alemania, Francia, Italia, España, Rusia |
+| 🇦🇪 Medio Oriente | UAE, Arabia Saudita, Qatar, Kuwait |
+| 🇨🇳 Asia Oriental | China, Japón, Corea del Sur |
+| 🇧🇷 América del Sur | Brasil, Argentina, Colombia |
+| 🇿🇦 África | Sudáfrica, Nigeria, Kenia, Egipto |
+| 🇦🇸 Oceanía | Australia, Nueva Zelanda |
+
+> ✅ **Siempre usa el formato internacional completo con código de país.**
+> Ejemplo: `+14155552671` (USA), `+447911123456` (UK), `+919876543210` (India)
+
+---
+
+## ⚠️ Disclaimer de Precisión
+
+> **La información mostrada por PhoneXtract NO siempre es 100% precisa.**
+
+- Los datos del operador pueden estar desactualizados (portación de números)
+- La ubicación se basa en prefijos, no en GPS real
+- La precisión varía por país (mayor para India)
+- La verificación de WhatsApp es solo esfuerzo máximo
+
+---
+
+## 📲 Instalación
+
+### 🐧 Arch Linux
 
 ```bash
-pkg update && pkg upgrade -y
-```
+# Actualizar sistema
+sudo pacman -Syu
 
-```bash
-pkg install git -y
-```
+# Instalar dependencias
+sudo pacman -S python python-pip git
 
-```bash
+# Clonar repositorio
 git clone https://github.com/thakur2309/phonextract.git
+cd phonextract
+
+# Crear entorno virtual
+python -m venv venv
+
+# Activar entorno virtual
+source venv/bin/activate
+
+# Instalar dependencias
+pip install -r requirements.txt
+
+# Ejecutar
+python phonextract.py
 ```
 
+**Para ejecutar nuevamente:**
 ```bash
 cd phonextract
-```
-
-```bash
-pip install -r requirements.txt
-```
-
-```bash
-python3 phonextract.py
-```
-
-### ⚡ One-Line Install (Termux)
-
-```bash
-pkg update && pkg upgrade && pkg install git && git clone https://github.com/thakur2309/phonextract.git && cd phonextract && pip install -r requirements.txt && python3 phonextract.py
+source venv/bin/activate
+python phonextract.py
 ```
 
 ---
 
-## 🐉 Installation — Kali Linux (Using venv)
-
-> On Kali Linux, system-wide `pip install` is restricted. It is recommended to use a **Python virtual environment (venv)** to avoid errors.
-
-### Step 1 — Update your system
+### 🐧 Ubuntu / Debian
 
 ```bash
+# Actualizar sistema
 sudo apt update && sudo apt upgrade -y
-```
 
-### Step 2 — Install required packages
+# Instalar dependencias
+sudo apt install python3 python3-pip python3-venv git -y
 
-```bash
-sudo apt install python3-venv python3-pip git -y
-```
-
-### Step 3 — Clone the repository
-
-```bash
+# Clonar repositorio
 git clone https://github.com/thakur2309/phonextract.git
-```
-
-### Step 4 — Navigate into the folder
-
-```bash
 cd phonextract
-```
 
-### Step 5 — Create a virtual environment
-
-```bash
+# Crear entorno virtual
 python3 -m venv venv
-```
 
-### Step 6 — Activate the virtual environment
-
-```bash
+# Activar entorno virtual
 source venv/bin/activate
-```
 
-> ✅ You will see `(venv)` at the start of your terminal — this means the virtual environment is active.
-
-### Step 7 — Install dependencies
-
-```bash
+# Instalar dependencias
 pip install -r requirements.txt
-```
 
-### Step 8 — Run the tool
-
-```bash
+# Ejecutar
 python3 phonextract.py
 ```
 
-### ⚡ One-Line Install (Kali Linux)
-
-```bash
-sudo apt update && sudo apt install python3-venv python3-pip git -y && git clone https://github.com/thakur2309/phonextract.git && cd phonextract && python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt && python3 phonextract.py
-```
-
-### 🔁 Run Again Next Time — Kali Linux
-
-Every time you want to use the tool again:
-
+**Para ejecutar nuevamente:**
 ```bash
 cd phonextract
 source venv/bin/activate
-python3 phonextract.py
-```
-
-### ❌ Deactivate Virtual Environment
-
-```bash
-deactivate
-```
-
----
-
-## 🖥️ Installation — Ubuntu / Debian / Parrot OS
-
-```bash
-sudo apt update && sudo apt install python3-venv python3-pip git -y
-git clone https://github.com/thakur2309/phonextract.git
-cd phonextract
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
 python3 phonextract.py
 ```
 
 ---
 
-## 🪟 Installation — Windows
+### 🎩 Fedora
 
-### Requirements
-- Python 3.x — Download from [python.org](https://www.python.org/downloads/)
-- Git — Download from [git-scm.com](https://git-scm.com/)
+```bash
+# Actualizar sistema
+sudo dnf update -y
 
-### Steps
+# Instalar dependencias
+sudo dnf install python3 python3-pip git -y
 
-```cmd
+# Clonar repositorio
+git clone https://github.com/thakur2309/phonextract.git
+cd phonextract
+
+# Crear entorno virtual
+python3 -m venv venv
+
+# Activar entorno virtual
+source venv/bin/activate
+
+# Instalar dependencias
+pip install -r requirements.txt
+
+# Ejecutar
+python3 phonextract.py
+```
+
+**Para ejecutar nuevamente:**
+```bash
+cd phonextract
+source venv/bin/activate
+python3 phonextract.py
+```
+
+---
+
+### 📱 Termux (Android)
+
+```bash
+# Actualizar sistema
+pkg update && pkg upgrade -y
+
+# Instalar dependencias
+pkg install git python -y
+
+# Clonar repositorio
+git clone https://github.com/thakur2309/phonextract.git
+cd phonextract
+
+# Instalar dependencias
+pip install -r requirements.txt
+
+# Ejecutar
+python phonextract.py
+```
+
+---
+
+### 🪟 Windows
+
+```bash
+# Requirements
+# - Python 3.x - Descargar de python.org
+# - Git - Descargar de git-scm.com
+
+# En CMD o PowerShell
 git clone https://github.com/thakur2309/phonextract.git
 cd phonextract
 python -m venv venv
@@ -215,21 +211,68 @@ python phonextract.py
 
 ---
 
-## 📌 Contact
+## 🚀 Uso
 
-<a href="https://youtube.com/@firewallbreaker09">
-  <img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube">
-</a>
-<br>
-<a href="https://github.com/thakur2309?tab=repositories">
-  <img src="https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
-</a>
-<br>
-<a href="https://whatsapp.com/channel/0029VbAiqVMKLaHjg5J1Nm2F">
-  <img src="https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="WhatsApp Channel">
-</a>
+1. Ejecuta el script: `python phonextract.py` (o `python3` en Linux)
+2. Ingresa el número telefónico con código de país (ej: +50512345678)
+3. La herramienta mostrará información detallada del número
 
 ---
 
-<p align="center">⭐ If you found this useful, please star the repository!</p>
-<p align="center">Made with ❤️ by Alok Thakur | Firewall Breaker</p>
+## 📂 Estructura del Proyecto
+
+```
+phonextract/
+├── phonextract.py      # Script principal
+├── requirements.txt    # Dependencias
+├── README.md           # Este archivo
+├── LICENSE             # Licencia MIT
+└── venv/               # Entorno virtual (no incluido en Git)
+```
+
+---
+
+## 📋 Requisitos
+
+- Python 3.8+
+- phonenumbers
+- colorama
+- requests
+
+---
+
+## 🔧 Configuración de GitHub Pages
+
+El sitio web está disponible en: **https://TU_USUARIO.github.io/phonextract/**
+
+Para configurar GitHub Pages:
+1. Ve a Settings > Pages
+2. En "Source", selecciona "main" branch
+3. El sitio se publicará automáticamente
+
+---
+
+## 📱 Redes del Creador
+
+<p align="center">
+  <a href="https://youtube.com/@firewallbreaker09">
+    <img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube">
+  </a>
+  <a href="https://github.com/thakur2309">
+    <img src="https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
+  </a>
+  <a href="https://wa.me/yournumber">
+    <img src="https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="WhatsApp">
+  </a>
+</p>
+
+---
+
+## 📄 Licencia
+
+Este proyecto está bajo la Licencia MIT. Consulta el archivo `LICENSE` para más detalles.
+
+---
+
+<p align="center">⭐ Si te fue útil, por favor dale una estrella al repositorio</p>
+<p align="center">Hecho con ❤️ por Agdala | TikTok: @agdalasv</p>
