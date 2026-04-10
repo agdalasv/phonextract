@@ -76,7 +76,7 @@ sudo pacman -Syu
 sudo pacman -S python python-pip git
 
 # Clonar repositorio
-git clone https://github.com/thakur2309/phonextract.git
+git clone https://github.com/agdalasv/phonextract.git
 cd phonextract
 
 # Crear entorno virtual
@@ -111,7 +111,7 @@ sudo apt update && sudo apt upgrade -y
 sudo apt install python3 python3-pip python3-venv git -y
 
 # Clonar repositorio
-git clone https://github.com/thakur2309/phonextract.git
+git clone https://github.com/agdalasv/phonextract.git
 cd phonextract
 
 # Crear entorno virtual
@@ -146,7 +146,7 @@ sudo dnf update -y
 sudo dnf install python3 python3-pip git -y
 
 # Clonar repositorio
-git clone https://github.com/thakur2309/phonextract.git
+git clone https://github.com/agdalasv/phonextract.git
 cd phonextract
 
 # Crear entorno virtual
@@ -181,7 +181,7 @@ pkg update && pkg upgrade -y
 pkg install git python -y
 
 # Clonar repositorio
-git clone https://github.com/thakur2309/phonextract.git
+git clone https://github.com/agdalasv/phonextract.git
 cd phonextract
 
 # Instalar dependencias
@@ -201,7 +201,7 @@ python phonextract.py
 # - Git - Descargar de git-scm.com
 
 # En CMD o PowerShell
-git clone https://github.com/thakur2309/phonextract.git
+git clone https://github.com/agdalasv/phonextract.git
 cd phonextract
 python -m venv venv
 venv\Scripts\activate
@@ -258,7 +258,7 @@ Para configurar GitHub Pages:
   <a href="https://youtube.com/@firewallbreaker09">
     <img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube">
   </a>
-  <a href="https://github.com/thakur2309">
+  <a href="https://github.com/agdalasv">
     <img src="https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
   </a>
   <a href="https://wa.me/yournumber">
